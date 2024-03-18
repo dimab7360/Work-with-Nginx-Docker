@@ -1,4 +1,12 @@
-FROM nginx:1.25
+FROM python:3.10
 
-RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx.conf /etc/nginx/conf.d
+WORKDIR /opt/3pich/Ssite
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONNUNBUFFERED 1
+
+RUN pip install --upgrade pip
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
